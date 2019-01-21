@@ -46,6 +46,21 @@ namespace LinqQueries
 
             SeparatingLine();
 
+            var lambdaGrouping = people.Where(p => p.Age > 20)              // an example of using lambda instead
+                                       .GroupBy(p => p.Gender);
+
+            foreach (var item in lambdaGrouping)
+            {
+                Console.WriteLine($"Gender: {item.Key}");
+
+                foreach (var p in item)
+                {
+                    Console.WriteLine($" {p.FirstName}, {p.Age}");
+                }
+            }
+
+            SeparatingLine();
+
             int[] arrayOfNumbers = { 14, 2, 34, 39, 47, 987, 123, 90, 15, 5, 6, 21, 12, 11, 84, 79, 109 };
 
             var numbers = from n in arrayOfNumbers
@@ -72,7 +87,7 @@ namespace LinqQueries
                                                 ? "Young"                           
                                                 : p.Age >= 20 && p.Age <= 30        
                                                     ? "Adult"                       
-                                                    : "More Adult"                      
+                                                    : "More Adult"                       
                                       group p by ageGroup;
 
             foreach (var p in peopleMultiGrouping)
